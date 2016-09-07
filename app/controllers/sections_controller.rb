@@ -32,7 +32,7 @@ class SectionsController < ApplicationController
   end
 
   def destroy
-    @chapter = Chapter.find(params[:id])
+    @section = Section.find(params[:id])
     @section.destroy
     flash[:notice] = "Section deleted"
     redirect_to chapters_path
