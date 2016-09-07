@@ -1,0 +1,13 @@
+<% if @section.any? %>
+
+<ul>
+  <% @section.each do |section| %>
+    <li><%= link_to section.name, section_path(section) %></li>
+  <% end %>
+</ul>
+<% else %>
+<p>
+  You done fucked up!
+</p>
+<hr>
+<% end %>

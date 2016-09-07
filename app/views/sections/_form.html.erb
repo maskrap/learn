@@ -1,0 +1,9 @@
+<%= form_for @section do | field | %>
+  <%= field.label :name %>
+  <%= field.text_field :name %>
+  <%= field.label :chapter_id %>
+  <%= field.number_field :chapter_id %>
+  <%= field.label :lesson_id %>
+  <%= field.number_field :lesson_id %>
+  <%= field.submit %>
+<% end %>

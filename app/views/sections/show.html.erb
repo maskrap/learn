@@ -1,0 +1,24 @@
+<h1><%= @section.name %></h1>
+
+
+<h1>Lessons: </h1>
+<% if @section.lessons.any? %>
+  <ul>
+    <li>
+      <% @section.lessons.each do |lesson| %>
+      <%= lesson.name %> |
+      <%= lesson.cheatsheet %> |
+      <p><%= link_to "Edit", edit_section_lesson_path(@lesson, section) %></p> |
+      <p><%= link_to "Delete", section_lesson_path(@lesson, section),
+      :data => {:confirm => "You sure?",
+        :method => "delete"} %></p>
+        <% end %>
+    </li>
+  </ul>
+<% else %>
+  <p>
+    You have no lessons
+  </p>
+<% end %>
+
+<p><%= link_to "Return to Sections", sections_path %></p>

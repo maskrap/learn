@@ -1,33 +1,31 @@
 class LessonsController < ApplicationController
-  def index
-    @lessons = Lesson.all
-  end
-
-  def show
-    @lesson = Lesson.find(params[:id])
-  end
 
   def new
-    @lesson = Lesson.new
+    @section = Section.find(params[:section_id])
+    @lesson = @section.lessons.new
   end
 
   def create
-    @lesson = Lesson.new(lesson_params)
+    @section = Section.find(params[:section_id])
+    @lesson = @section.lessons.new(lesson_params)
     if @lesson.save
-      redirect_to lessons_path
+      redirect_to section_path(@lesson.section)
     else
       render :new
     end
   end
 
   def edit
+    @section = Section.find(params[:section_id])
     @lesson = Lesson.find(params[:id])
   end
 
   def update
+    @section = Section.find(params[:id])
     @lesson = Lesson.find(params[:id])
     if @lesson.update(lesson_params)
-      redirect_to lessons_path
+      flash[:notice] = "Lesson updated!"
+      redirect_to sections_path(@lesson.section)
     else
       render :edit
     end
@@ -36,7 +34,8 @@ class LessonsController < ApplicationController
   def destroy
     @lesson = Lesson.find(params[:id])
     @lesson.destroy
-    redirect_to lessons_path
+    flash[:notice] = "Lesson deleted"
+    redirect_to sections_path
   end
 
   private
